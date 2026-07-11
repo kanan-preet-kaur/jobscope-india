@@ -33,7 +33,6 @@ This project aims to answer questions such as:
 * Which cities have the greatest hiring demand?
 * What technical skills are currently most sought after?
 * How does experience influence salary?
-* How are company ratings and reviews related?
 * What insights can help students and job seekers make informed career decisions?
 
 ---
@@ -107,10 +106,7 @@ The exploratory analysis includes:
 * Top Hiring Cities
 * Skill Demand Analysis
 * Experience Distribution
-* Company Rating Analysis
-* Review Count Analysis
 * Correlation Analysis
-* Business Insights & Recommendations
 
 ---
 
@@ -124,7 +120,6 @@ The analysis reveals several important trends in the Indian job market:
 * A relatively small number of companies account for a large share of total job postings.
 * Specialized technical skills command higher salaries.
 * Strong combinations of complementary skills improve employability.
-* Company ratings show only a weak relationship with salary levels.
 
 ---
 
@@ -148,7 +143,7 @@ The Streamlit dashboard will provide:
 Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/jobscope-india.git
+git clone https://github.com/kanan-preet-kaur/jobscope-india.git
 ```
 
 Navigate into the project:
@@ -177,18 +172,6 @@ Project screenshots and dashboard demonstrations will be added as development pr
 
 ---
 
-## 🔮 Future Improvements
-
-* Interactive filtering by company, location, and skills
-* Salary prediction using Machine Learning
-* Skill recommendation engine
-* Job trend forecasting
-* Resume skill-gap analysis
-* Natural Language Processing on job descriptions
-* Deployment on Streamlit Community Cloud
-
----
-
 ## 📚 Learning Outcomes
 
 This project demonstrates practical experience with:
@@ -213,8 +196,6 @@ Current progress includes:
 * ✅ Data Audit
 * ✅ Data Cleaning
 * ✅ Exploratory Data Analysis
-* 🚧 Interactive Dashboard
-* ⏳ Deployment
 
 ---
 
