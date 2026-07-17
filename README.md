@@ -198,22 +198,6 @@ pip install -r requirements.txt
 ```bash
 streamlit run app/Home.py
 ```
----
-
-# 📸 Dashboard Preview
-
-> **Add screenshots or GIFs of your dashboard here after deployment.**
-
-Suggested previews:
-
-* 🏠 Home Dashboard
-* 💰 Compensation Analysis
-* 📈 Job Market Analysis
-* 🛠️ Skills Analysis
-* 🏢 Company Analysis
-* 👨‍💼 Experience Analysis
-* 🌍 Geographic Analysis
-* 📌 Key Findings
 
 ---
 
@@ -275,13 +259,6 @@ Passionate about **Data Analytics**, **Data Visualization**, and **Software Deve
 
 ---
 
-# ⭐ Support
-
-If you found this project helpful or interesting, consider giving it a **⭐ Star** on GitHub.
-
-Your support helps others discover the project and motivates future improvements.
-
----
 
 <div align="center">
 
