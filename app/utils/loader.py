@@ -1,26 +1,23 @@
 from pathlib import Path
 import pandas as pd
-
-# Project root: jobscope-india/
-ROOT = Path(__file__).resolve().parents[2]
-
-DATA_PATH = ROOT / "data" / "processed" / "cleaned_job_market.csv"
+import streamlit as st
 
 
-def load_job_data():
+@st.cache_data(show_spinner=False)
+def load_data():
     """
-    Loads the cleaned dataset and returns:
-    (DataFrame, None)
+    Load the cleaned dataset once and cache it.
     """
 
-    if not DATA_PATH.exists():
-        raise FileNotFoundError(
-            f"Dataset not found:\n{DATA_PATH}"
-        )
+    project_root = Path(__file__).resolve().parents[2]
 
-    df = pd.read_csv(DATA_PATH)
+    data_path = (
+        project_root
+        / "data"
+        / "processed"
+        / "cleaned_job_market.csv"
+    )
 
-    return df, None
+    df = pd.read_csv(data_path)
 
-print(DATA_PATH)
-print(DATA_PATH.exists())
+    return df

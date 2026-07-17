@@ -1,311 +1,1098 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from matplotlib.ticker import FuncFormatter
-from utils.loader import load_job_data
-from utils.styling import apply_custom_css, get_theme_colors
 
-# 1. Page Config & Professional Theme Colors
-st.set_page_config(
-    page_title="Compensation Analysis",
-    page_icon="💰",
-    layout="wide"
-)
+import plotly.express as px
 
-# YOUR exact project theme constants
-PRIMARY_BLUE  = "#1E3A8A"
-SUCCESS_GREEN = "#10B981"
-ACCENT_AMBER  = "#F59E0B"
-MUTED_SLATE   = "#64748B"
-TEXT_DARK     = "#1E293B"
-GRID          = "#E2E8F0"
 
-# YOUR exact rcParams configuration
-plt.rcParams["figure.facecolor"] = "white"
-plt.rcParams["axes.facecolor"] = "white"
-plt.rcParams["axes.edgecolor"] = "#CBD5E1"
-plt.rcParams["axes.linewidth"] = 1.2
-plt.rcParams["text.color"] = TEXT_DARK
-plt.rcParams["axes.labelcolor"] = TEXT_DARK
-plt.rcParams["xtick.color"] = TEXT_DARK
-plt.rcParams["ytick.color"] = TEXT_DARK
-plt.rcParams["font.size"] = 11
-plt.rcParams["axes.labelsize"] = 12
-plt.rcParams["axes.titlesize"] = 18
-plt.rcParams["axes.titleweight"] = "bold"
-plt.rcParams["axes.grid"] = True
-plt.rcParams["grid.color"] = GRID
-plt.rcParams["grid.linestyle"] = "--"
-plt.rcParams["grid.alpha"] = 0.6
+from utils.loader import load_data
+from utils.theme import apply_page_config, inject_theme_css
 
-sns.set_style("whitegrid")
+from components.sidebar import render_sidebar
+from components.metrics import metric_card
 
-# YOUR exact custom plot styling helper function
-def style_plot(ax, title, xlabel, ylabel):
-    ax.set_title(
-        title,
-        fontsize=18,
-        fontweight="bold",
-        pad=18
+# =====================================
+# PROJECT THEME
+# =====================================
+
+
+# Primary Color Palette
+
+PRIMARY = "#6D28D9"      
+SECONDARY = "#8B5CF6"    
+ACCENT = "#A78BFA"       
+
+PINK = "#EC4899"
+MAGENTA = "#D946EF"
+INDIGO = "#4F46E5"
+CYAN = "#06B6D4"
+
+
+
+# Semantic Colors
+
+SUCCESS = "#22C55E"
+WARNING = "#F59E0B"
+DANGER = "#EF4444"
+
+
+
+# Text & Layout
+
+TEXT = "#0F172A"
+MUTED = "#64748B"
+
+GRID = "#E2E8F0"
+
+FONT = "Arial"
+
+
+
+# =====================================
+# PLOT STYLE FUNCTION
+# SAME AS EDA NOTEBOOK
+# =====================================
+
+
+def style_plot(fig):
+
+    fig.update_layout(
+
+        template="plotly_dark",
+
+        # FORCE PLOTLY BACKGROUND
+        plot_bgcolor="#0F172A",
+        paper_bgcolor="#0F172A",
+
+        font=dict(
+            family=FONT,
+            size=13,
+            color="#F8FAFC"
+        ),
+
+        title=dict(
+            x=0.5,
+            xanchor="center",
+            font=dict(
+                size=20,
+                family=FONT,
+                color="#F8FAFC"
+            )
+        ),
+
+        margin=dict(
+            l=40,
+            r=40,
+            t=65,
+            b=35
+        ),
+
+        hovermode="x unified",
+
+        legend=dict(
+            bgcolor="rgba(0,0,0,0)",
+            borderwidth=0
+        )
     )
-    ax.set_xlabel(
-        xlabel,
-        fontsize=12,
-        labelpad=14
-    )
-    ax.set_ylabel(
-        ylabel,
-        fontsize=12,
-        labelpad=14
-    )
-    ax.tick_params(
-        axis="both",
-        labelsize=11
-    )
-    ax.grid(
-        axis="y",
-        linestyle="--",
-        linewidth=0.7,
-        alpha=0.6,
-        color=GRID
-    )
-    sns.despine(left=False, bottom=False)
 
-# Custom container styling for breathing space & card aesthetics
-st.markdown("""
-    <style>
-    .reportview-container {
-        background-color: #F8FAFC;
-    }
-    .metric-card {
-        background-color: white;
-        padding: 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-        border: 1px solid #E2E8F0;
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    .insight-card {
-        background-color: #F8FAFC;
-        padding: 1.5rem;
-        border-left: 4px solid #1E3A8A;
-        border-radius: 4px 12px 12px 4px;
-        margin-top: 1.5rem;
-        margin-bottom: 3rem;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    }
-    .space-divider {
-        margin-top: 4rem;
-        margin-bottom: 4rem;
-        border-bottom: 1px solid #E2E8F0;
-    }
-    </style>
-""", unsafe_allow_html=True)
 
-# 2. Data Loading & Subsetting (using your exact processed path and logic)
-@st.cache_data
-def load_data():
-    # Loading the processed data you cleaned
-    df, is_mock = load_job_data()
-    
-    # YOUR exact salary subsetting logic
-    salary_df = df[
-        (df["averageSalary"] > 0) &
-        (df["averageSalary"] <= df["averageSalary"].quantile(0.99))
-    ].copy()
-    
-    return salary_df
+    fig.update_xaxes(
+        showgrid=False,
+        zeroline=False,
+        showline=False,
+        color="#CBD5E1"
+    )
 
-salary_df = load_data()
 
-# Header block with clean breathing space
-st.markdown('<div style="margin-top: 2rem;"></div>', unsafe_allow_html=True)
-st.title("💰 Salary & Compensation Analysis")
+    fig.update_yaxes(
+        showgrid=True,
+        gridcolor="#334155",
+        griddash="dot",
+        gridwidth=0.8,
+        zeroline=False,
+        showline=False,
+        color="#CBD5E1"
+    )
+
+
+    return fig
+
+
+
+# =====================================
+# INITIALIZATION
+# =====================================
+
+apply_page_config()
+
+inject_theme_css()
+
+render_sidebar()
+
+
+
+# =====================================
+# LOAD DATA
+# =====================================
+
+df = load_data()
+
+
+
+
+# =====================================
+# SALARY DATASET
+# SAME FILTERING AS EDA
+# =====================================
+
+salary_df = df[
+    (df["averageSalary"] > 0) &
+    (df["averageSalary"] <= df["averageSalary"].quantile(0.99))
+].copy()
+
+
+
+# =====================================
+# HERO SECTION
+# =====================================
+
 st.markdown(
-    """
-    <p style="font-size: 1.15rem; color: #64748B; margin-bottom: 3rem;">
-    An in-depth evaluation of salary trends, range distributions, outlier metrics, and minimum vs. maximum salary bands.
-    </p>
-    """, 
-    unsafe_allow_html=True
+"""
+<div class="hero-section">
+
+<h1>
+💰 Compensation Analysis
+</h1>
+
+<p>
+Understanding salary patterns, compensation
+distribution, and earning potential across
+India's employment landscape.
+</p>
+
+</div>
+""",
+unsafe_allow_html=True
 )
 
-# 3. KPI / Metrics Cards
-kpi_col1, kpi_col2, kpi_col3 = st.columns(3)
-
-with kpi_col1:
-    st.markdown(f"""
-        <div class="metric-card">
-            <span style="color: #64748B; font-size: 0.9rem; font-weight: 600; text-transform: uppercase;">Median Salary</span>
-            <h2 style="color: #1E3A8A; font-size: 2.2rem; margin: 0.5rem 0;">₹{salary_df["averageSalary"].median()/100000:.2f}L</h2>
-            <span style="color: #10B981; font-size: 0.85rem;">Most representative market midpoint</span>
-        </div>
-    """, unsafe_allow_html=True)
-
-with kpi_col2:
-    st.markdown(f"""
-        <div class="metric-card">
-            <span style="color: #64748B; font-size: 0.9rem; font-weight: 600; text-transform: uppercase;">Maximum Salary Limit</span>
-            <h2 style="color: #10B981; font-size: 2.2rem; margin: 0.5rem 0;">₹{salary_df["averageSalary"].max()/100000:.2f}L</h2>
-            <span style="color: #64748B; font-size: 0.85rem;">99th percentile capping applied</span>
-        </div>
-    """, unsafe_allow_html=True)
-
-with kpi_col3:
-    st.markdown(f"""
-        <div class="metric-card">
-            <span style="color: #64748B; font-size: 0.9rem; font-weight: 600; text-transform: uppercase;">Total Active Postings</span>
-            <h2 style="color: #F59E0B; font-size: 2.2rem; margin: 0.5rem 0;">{len(salary_df):,}</h2>
-            <span style="color: #64748B; font-size: 0.85rem;">With valid disclosed salary data</span>
-        </div>
-    """, unsafe_allow_html=True)
-
-st.markdown('<div class="space-divider"></div>', unsafe_allow_html=True)
 
 
-# ==========================================
-# CHART 1: SALARY DISTRIBUTION (EXACTLY YOURS)
-# ==========================================
-st.subheader("📊 Salary Distribution Profile")
+st.write("")
 
-fig1, ax1 = plt.subplots(figsize=(13, 6), dpi=150)
-sns.histplot(
-    data=salary_df,
+
+
+# =====================================
+# PAGE INTRODUCTION
+# =====================================
+
+
+st.markdown(
+"""
+<div class="content-card">
+
+<h3>
+📌 What This Analysis Covers
+</h3>
+
+
+<p>
+
+This section explores how compensation varies
+across the Indian job market.
+
+The analysis focuses on salary distribution,
+salary variability, and the relationship between
+professional experience and earning potential.
+
+</p>
+
+
+</div>
+""",
+unsafe_allow_html=True
+)
+
+
+
+st.write("")
+
+
+
+# =====================================
+# COMPENSATION SNAPSHOT
+# =====================================
+
+
+st.markdown(
+"""
+<h2 class="section-heading">
+📊 Compensation Snapshot
+</h2>
+""",
+unsafe_allow_html=True
+)
+
+
+
+col1, col2, col3, col4 = st.columns(
+    4,
+    gap="large"
+)
+
+
+
+with col1:
+
+    metric_card(
+        "Average Salary",
+        f"₹{salary_df['averageSalary'].mean()/100000:.2f}L",
+        "💰"
+    )
+
+
+
+with col2:
+
+    metric_card(
+        "Median Salary",
+        f"₹{salary_df['averageSalary'].median()/100000:.2f}L",
+        "📈"
+    )
+
+
+
+with col3:
+
+    metric_card(
+        "Maximum Salary",
+        f"₹{salary_df['maximumSalary'].max()/100000:.1f}L",
+        "🚀"
+    )
+
+
+
+with col4:
+
+    metric_card(
+        "Job Records",
+        f"{len(salary_df):,}",
+        "📑"
+    )
+
+
+
+st.divider()
+
+
+
+# =====================================
+# ANALYSIS INTRO
+# =====================================
+
+
+st.markdown(
+"""
+<div class="section-banner">
+
+<h3>
+📈 Salary Intelligence
+</h3>
+
+<p>
+
+The following analysis uses cleaned job market
+data to understand salary concentration,
+market variation, and compensation growth.
+
+</p>
+
+</div>
+""",
+unsafe_allow_html=True
+)
+
+# =====================================
+# SALARY EXPLORER
+# =====================================
+
+
+st.markdown(
+"""
+<h2 class="section-heading">
+🎛️ Salary Explorer
+</h2>
+""",
+unsafe_allow_html=True
+)
+
+
+
+filter_container = st.container()
+
+
+
+with filter_container:
+
+
+    filter_col1, filter_col2 = st.columns(
+        2,
+        gap="large"
+    )
+
+
+    with filter_col1:
+
+        experience_range = st.slider(
+
+            "Experience Range (Years)",
+
+            min_value=int(
+                df["averageExperience"].min()
+            ),
+
+            max_value=int(
+                df["averageExperience"].max()
+            ),
+
+            value=(
+
+                int(
+                    df["averageExperience"].min()
+                ),
+
+                int(
+                    df["averageExperience"].max()
+                )
+
+            )
+
+        )
+
+
+
+    with filter_col2:
+
+
+        salary_range = st.slider(
+
+            "Average Salary Range (Lakhs)",
+
+            min_value=0,
+
+            max_value=int(
+                salary_df["averageSalary"].max()/100000
+            ),
+
+            value=(
+
+                0,
+
+                int(
+                    salary_df["averageSalary"].max()/100000
+                )
+
+            )
+
+        )
+
+
+
+filtered_salary_df = salary_df[
+
+    (salary_df["averageExperience"] >= experience_range[0])
+
+    &
+
+    (salary_df["averageExperience"] <= experience_range[1])
+
+    &
+
+    (salary_df["averageSalary"] >= salary_range[0] * 100000)
+
+    &
+
+    (salary_df["averageSalary"] <= salary_range[1] * 100000)
+
+].copy()
+
+
+
+st.divider()
+
+
+
+# =====================================
+# CHART 1
+# DISTRIBUTION OF AVERAGE SALARIES
+# FROM EDA NOTEBOOK
+# =====================================
+
+
+st.markdown(
+"""
+<h2 class="section-heading">
+📈 Distribution of Average Salaries
+</h2>
+""",
+unsafe_allow_html=True
+)
+
+
+
+fig = px.histogram(
+
+    filtered_salary_df,
+
     x="averageSalary",
-    bins=35,
-    color=PRIMARY_BLUE,
-    edgecolor="white",
-    linewidth=0.5,
-    alpha=0.95,
-    ax=ax1
+
+    nbins=35,
+
+    title="Distribution of Average Salaries",
+
+    opacity=0.88,
+
+    color_discrete_sequence=[PRIMARY]
+
 )
-ax1.xaxis.set_major_formatter(
-    FuncFormatter(lambda x, pos: f"₹{x/100000:.0f}L")
+
+
+
+# Salary axis in Lakhs
+max_salary = filtered_salary_df["averageSalary"].max()
+
+
+tick_step = 500000
+
+
+tick_vals = np.arange(
+    0,
+    max_salary + tick_step,
+    tick_step
 )
-style_plot(
-    ax1,
-    "Distribution of Average Salaries",
-    "Average Salary (INR)",
-    "Number of Job Postings"
+
+
+tick_text = [
+
+    f"₹{int(x/100000)}L"
+
+    for x in tick_vals
+
+]
+
+
+
+fig.update_xaxes(
+
+    title="Average Salary (INR)",
+
+    tickmode="array",
+
+    tickvals=tick_vals,
+
+    ticktext=tick_text
+
 )
-plt.tight_layout()
-
-# Draw directly to dashboard!
-st.pyplot(fig1)
-plt.close(fig1)
-
-st.markdown("""
-    <div class="insight-card">
-        <h4 style="color: #1E293B; margin-top:0;">💡 Chart 1 Insights</h4>
-        <ul style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin-bottom:0;">
-            <li>The salary distribution is <strong>positively skewed</strong>, indicating that most job opportunities offer salaries within the lower-to-middle compensation range.</li>
-            <li>A majority of job postings provide average annual salaries between <strong>₹2 lakh and ₹5 lakh</strong>.</li>
-            <li>Only a relatively small proportion of positions offer substantially higher salaries, creating a long right tail.</li>
-            <li>The distribution suggests that high-paying opportunities exist but represent a niche segment of the overall market.</li>
-        </ul>
-    </div>
-""", unsafe_allow_html=True)
-
-st.markdown('<div class="space-divider"></div>', unsafe_allow_html=True)
 
 
-# ==========================================
-# CHART 2: SALARY OUTLIER ANALYSIS (EXACTLY YOURS)
-# ==========================================
-st.subheader("📦 Outlier Spread & Dispersion")
 
-fig2, ax2 = plt.subplots(figsize=(13, 3), dpi=150)
-sns.boxplot(
-    x=salary_df["averageSalary"],
-    color=PRIMARY_BLUE,
+fig.update_yaxes(
+
+    title="Number of Job Postings"
+
+)
+
+
+
+fig.update_traces(
+
+    marker=dict(
+
+        line=dict(
+
+            color="rgba(255,255,255,0.35)",
+
+            width=0.7
+
+        )
+
+    ),
+
+
+    hovertemplate=(
+
+        "<b>Average Salary</b><br>"
+
+        "₹%{x:,.0f}<br><br>"
+
+        "<b>Job Postings</b><br>"
+
+        "%{y:,}"
+
+        "<extra></extra>"
+
+    )
+
+)
+
+
+
+fig = style_plot(fig)
+
+
+
+st.plotly_chart(
+
+    fig,
+
+    use_container_width=True
+
+)
+
+
+# =====================================
+# INSIGHT CARD
+# =====================================
+
+st.markdown(
+"""
+<div class="insight-box">
+
+
+<div class="insight-header">
+
+💡 Salary Distribution Insight
+
+</div>
+
+
+<div class="insight-text">
+
+The salary distribution is 
+<span class="highlight">
+positively skewed
+</span>,
+indicating that most job opportunities are
+concentrated within the lower-to-middle
+compensation range.
+
+
+
+
+A smaller segment of premium-paying roles
+creates a long salary tail, highlighting the
+impact of specialised skills and premium
+positions on earning potential.
+
+</div>
+
+
+</div>
+""",
+unsafe_allow_html=True
+)
+
+# =====================================
+# CHART 2
+# SALARY OUTLIER ANALYSIS
+# FROM EDA NOTEBOOK
+# =====================================
+
+
+st.markdown(
+"""
+<h2 class="section-heading">
+📦 Salary Distribution with Outliers
+</h2>
+""",
+unsafe_allow_html=True
+)
+
+
+
+fig = px.box(
+
+    filtered_salary_df,
+
+    x="averageSalary",
+
+    title="Average Salary Distribution with Outliers",
+
+    color_discrete_sequence=[SECONDARY],
+
+    points="outliers"
+
+)
+
+
+
+# Salary axis in Lakhs
+
+max_salary = filtered_salary_df["averageSalary"].max()
+
+
+tick_step = 500000
+
+
+tick_vals = np.arange(
+
+    0,
+
+    max_salary + tick_step,
+
+    tick_step
+
+)
+
+
+tick_text = [
+
+    f"₹{int(x/100000)}L"
+
+    for x in tick_vals
+
+]
+
+
+
+fig.update_xaxes(
+
+    title="Average Salary (INR)",
+
+    tickmode="array",
+
+    tickvals=tick_vals,
+
+    ticktext=tick_text
+
+)
+
+
+
+fig.update_yaxes(
+
+    title=""
+
+)
+
+
+
+fig.update_traces(
+
+
     width=0.45,
-    linewidth=1,
-    fliersize=3,
-    ax=ax2
-)
-ax2.xaxis.set_major_formatter(
-    FuncFormatter(lambda x, pos: f"₹{x/100000:.0f}L")
-)
-style_plot(
-    ax2,
-    "Average Salary Distribution with Outliers",
-    "Average Salary (INR)",
-    ""
-)
-plt.tight_layout()
 
-# Draw directly to dashboard!
-st.pyplot(fig2)
-plt.close(fig2)
 
-st.markdown("""
-    <div class="insight-card">
-        <h4 style="color: #1E293B; margin-top:0;">💡 Chart 2 Insights</h4>
-        <ul style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin-bottom:0;">
-            <li>Most salaries are concentrated within a narrow range, while a limited number of jobs offer exceptionally high compensation.</li>
-            <li>Several <strong>high-value outliers</strong> are visible, confirming the presence of premium-paying positions.</li>
-            <li>The positive skew indicates that <strong>median salary</strong> is a more representative measure than the arithmetic mean.</li>
-            <li>Salary variability increases considerably at higher compensation levels.</li>
-        </ul>
+    marker=dict(
+
+        size=5,
+
+        opacity=0.75,
+
+        line=dict(
+
+            color="white",
+
+            width=0.5
+
+        )
+
+    ),
+
+
+    line=dict(
+
+        width=2
+
+    ),
+
+
+    hovertemplate=(
+
+        "<b>Average Salary</b><br>"
+
+        "₹%{x:,.0f}"
+
+        "<extra></extra>"
+
+    )
+
+)
+
+
+
+fig = style_plot(fig)
+
+
+
+st.plotly_chart(
+
+    fig,
+
+    use_container_width=True
+
+)
+
+
+st.markdown(
+"""
+<div class="insight-box">
+
+
+<div class="insight-header">
+
+📦 Salary Variability Insight
+
+</div>
+
+
+
+<div class="insight-text">
+
+Most salaries remain concentrated within a
+stable compensation range, while a smaller
+number of roles create significant outliers.
+
+
+These high-value positions demonstrate how
+<span class="highlight">
+specialised skills, seniority, and role complexity
+</span>
+influence compensation levels.
+
+</div>
+
+
+</div>
+""",
+unsafe_allow_html=True
+)
+
+# =====================================
+# CHART 3
+# AVERAGE SALARY BY EXPERIENCE LEVEL
+# FROM EDA NOTEBOOK
+# =====================================
+
+
+st.markdown(
+"""
+<h2 class="section-heading">
+📈 Average Salary by Experience Level
+</h2>
+""",
+unsafe_allow_html=True
+)
+
+
+
+experience_salary = (
+
+    filtered_salary_df
+    .groupby("averageExperience")["averageSalary"]
+    .mean()
+    .reset_index()
+    .sort_values("averageExperience")
+
+)
+
+
+
+fig = px.line(
+
+    experience_salary,
+
+    x="averageExperience",
+
+    y="averageSalary",
+
+    title="Average Salary by Experience Level",
+
+    markers=True,
+
+    color_discrete_sequence=[CYAN]
+
+)
+
+
+
+# Salary axis in Lakhs
+
+max_salary = experience_salary["averageSalary"].max()
+
+
+tick_step = 500000
+
+
+tick_vals = np.arange(
+
+    0,
+
+    max_salary + tick_step,
+
+    tick_step
+
+)
+
+
+tick_text = [
+
+    f"₹{int(x/100000)}L"
+
+    for x in tick_vals
+
+]
+
+
+
+fig.update_xaxes(
+
+    title="Average Experience (Years)"
+
+)
+
+
+
+fig.update_yaxes(
+
+    title="Average Salary (INR)",
+
+    tickmode="array",
+
+    tickvals=tick_vals,
+
+    ticktext=tick_text
+
+)
+
+
+
+fig.update_traces(
+
+    line=dict(
+
+        width=3
+
+    ),
+
+
+    marker=dict(
+
+        size=8,
+
+        line=dict(
+
+            color="white",
+
+            width=1
+
+        )
+
+    ),
+
+
+    hovertemplate=(
+
+        "<b>Experience</b><br>"
+
+        "%{x:.1f} Years"
+
+        "<br><br>"
+
+        "<b>Average Salary</b><br>"
+
+        "₹%{y:,.0f}"
+
+        "<extra></extra>"
+
+    )
+
+)
+
+
+
+fig = style_plot(fig)
+
+
+
+st.plotly_chart(
+
+    fig,
+
+    use_container_width=True
+
+)
+
+
+
+st.markdown(
+"""
+<div class="insight-box">
+
+
+<div class="insight-header">
+
+📈 Experience vs Compensation Trend
+
+</div>
+
+
+
+<div class="insight-text">
+
+Salary shows a clear upward trend as
+professional experience increases.
+
+
+Experience acts as one of the strongest market
+signals, with experienced professionals gaining
+access to
+<span class="highlight">
+higher earning potential
+</span>
+through advanced responsibilities and expertise.
+
+</div>
+
+
+</div>
+""",
+unsafe_allow_html=True
+)
+
+# =====================================
+# COMPENSATION ANALYSIS SUMMARY
+# =====================================
+
+st.divider()
+
+st.markdown(
+"""
+<h2 class="section-heading">
+📌 Compensation Analysis Summary
+</h2>
+""",
+unsafe_allow_html=True
+)
+
+
+col1, col2 = st.columns(2, gap="large")
+
+
+with col1:
+
+    st.markdown(
+    """
+    <div class="insight-box">
+
+    <div class="insight-header">
+    💰 Salary Distribution
     </div>
-""", unsafe_allow_html=True)
 
-st.markdown('<div class="space-divider"></div>', unsafe_allow_html=True)
+    <div class="insight-text">
 
+    • Most job opportunities are concentrated
+    within the lower-to-middle salary range.
 
-# ==========================================
-# CHART 7: MIN VS MAX SALARIES (EXACTLY YOURS)
-# ==========================================
-st.subheader("⚖️ Salary Range Disparity: Minimum vs Maximum")
+    • The compensation distribution is positively
+    skewed due to a smaller number of premium roles.
 
-fig7, ax7 = plt.subplots(figsize=(13, 6), dpi=150)
-sns.histplot(
-    salary_df["minimumSalary"],
-    bins=35,
-    color=PRIMARY_BLUE,
-    alpha=0.55,
-    label="Minimum Salary",
-    edgecolor="white",
-    ax=ax7
-)
-sns.histplot(
-    salary_df["maximumSalary"],
-    bins=25,
-    color=SUCCESS_GREEN,
-    alpha=0.45,
-    label="Maximum Salary",
-    edgecolor="white",
-    ax=ax7
-)
-ax7.legend(facecolor="white", edgecolor=GRID, framealpha=1)
-ax7.xaxis.set_major_formatter(
-    FuncFormatter(lambda x, pos: f"₹{int(x/100000)}L")
-)
-style_plot(
-    ax7,
-    "Distribution of Minimum and Maximum Salaries",
-    "Salary (INR)",
-    "Number of Job Postings"
-)
-plt.tight_layout()
+    • Average salary is influenced by high-paying
+    positions, making median salary a better
+    indicator of typical earnings.
 
-# Draw directly to dashboard!
-st.pyplot(fig7)
-plt.close(fig7)
-
-st.markdown("""
-    <div class="insight-card" style="border-left-color: #10B981;">
-        <h4 style="color: #1E293B; margin-top:0;">💡 Chart 3 Insights</h4>
-        <ul style="color: #475569; font-size: 0.95rem; line-height: 1.6; margin-bottom:0;">
-            <li>Maximum salaries exhibit considerably greater variation than minimum salaries.</li>
-            <li>Many employers advertise broad salary ranges, reflecting flexibility based on candidate experience and skills.</li>
-            <li>Minimum salaries remain relatively concentrated, while upper salary limits vary significantly.</li>
-            <li>Wider salary ranges suggest <strong>stronger negotiation opportunities</strong> for qualified candidates.</li>
-        </ul>
     </div>
-""", unsafe_allow_html=True)
 
-st.markdown('<div style="margin-bottom: 4rem;"></div>', unsafe_allow_html=True)
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+
+with col2:
+
+    st.markdown(
+    """
+    <div class="insight-box">
+
+    <div class="insight-header">
+    📈 Experience & Salary Growth
+    </div>
+
+    <div class="insight-text">
+
+    • Compensation shows a positive relationship
+    with professional experience.
+
+    • Experienced professionals gain access to
+    higher-value opportunities.
+
+    • Seniority and expertise remain important
+    factors influencing earning potential.
+
+    </div>
+
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+
+
+col3, col4 = st.columns(2, gap="large")
+
+
+with col3:
+
+    st.markdown(
+    """
+    <div class="insight-box">
+
+    <div class="insight-header">
+    🚀 Premium Compensation
+    </div>
+
+    <div class="insight-text">
+
+    • High-paying roles represent a smaller segment
+    of the overall job market.
+
+    • Specialized skills and advanced expertise
+    create significant salary advantages.
+
+    • Premium opportunities are associated with
+    greater responsibility and role complexity.
+
+    </div>
+
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+
+
+with col4:
+
+    st.markdown(
+    """
+    <div class="insight-box">
+
+    <div class="insight-header">
+    🎯 Key Takeaway
+    </div>
+
+    <div class="insight-text">
+
+    Compensation growth depends on a combination
+    of experience, specialization, and market demand.
+
+    Professionals can maximize earning potential
+    by developing advanced skills aligned with
+    high-value opportunities.
+
+    </div>
+
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
