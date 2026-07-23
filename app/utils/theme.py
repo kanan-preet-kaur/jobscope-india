@@ -1,13 +1,16 @@
 import streamlit as st
 from pathlib import Path
 from config import COLORS
+from config import LOGO_PATH
 
+
+from config import LOGO_PATH
 
 def apply_page_config():
 
     st.set_page_config(
         page_title="JobScope India | Analytics Dashboard",
-        page_icon="📊",
+        page_icon=str(LOGO_PATH),
         layout="wide",
         initial_sidebar_state="expanded"
     )

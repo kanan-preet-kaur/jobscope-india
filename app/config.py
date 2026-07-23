@@ -6,7 +6,7 @@ PROJECT_NAME = "JobScope India"
 
 PROJECT_TAGLINE = (
     "Interactive analytics platform exploring India's "
-    "technology job market trends, salaries, skills, and hiring insights."
+    "job market trends, salaries, skills, and hiring insights."
 )
 
 PROJECT_DESCRIPTION = """
@@ -18,9 +18,11 @@ career insights using interactive visual analytics.
 # BRANDING
 # ============================================================
 
-APP_ICON = "assets/icons/favicon.png"
+from pathlib import Path
 
-LOGO_PATH = "assets/icons/logo.png"
+BASE_DIR = Path(__file__).parent
+
+LOGO_PATH = BASE_DIR / "assets" / "icons" / "logo.png"
 
 
 # ============================================================

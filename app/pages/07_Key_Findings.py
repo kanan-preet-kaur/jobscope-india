@@ -1,4 +1,12 @@
 import streamlit as st
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.warning("Please register/login to access the dashboard.")
+    st.switch_page("pages/00_Authentication.py")
+
 import pandas as pd
 import numpy as np
 
@@ -64,7 +72,6 @@ locations = df["location"].nunique()
 
 # =====================================
 # COMPENSATION METRICS
-# EXACT SAME AS COMPENSATION PAGE
 # =====================================
 
 salary_df = df[
@@ -75,7 +82,6 @@ salary_df = df[
 
 # =====================================
 # SKILLS METRICS
-# EXACT SAME AS SKILLS PAGE
 # =====================================
 
 skills = (
@@ -133,7 +139,6 @@ highest_paying_skill = (
 
 # =====================================
 # EXPERIENCE METRICS
-# EXACT SAME AS EXPERIENCE PAGE
 # =====================================
 
 experience_df = df[
@@ -161,7 +166,6 @@ average_experience = (
 
 # =====================================
 # COMPANY METRICS
-# EXACT SAME AS COMPANY PAGE
 # =====================================
 
 company_counts = (
@@ -194,7 +198,6 @@ most_reviewed = (
 
 # =====================================
 # GEOGRAPHIC METRICS
-# EXACT SAME AS GEOGRAPHIC PAGE
 # =====================================
 
 location_counts = (
@@ -274,7 +277,7 @@ unsafe_allow_html=True
 )
 
 st.write("")
-
+st.divider()
 
 # =====================================
 # EXECUTIVE DASHBOARD
@@ -365,6 +368,7 @@ with row2_col4:
         "🏆"
     )
 
+st.write("")
 st.divider()
 
 
@@ -394,6 +398,7 @@ one complete executive report.
 unsafe_allow_html=True
 )
 
+st.write("")
 st.divider()
 
 # =====================================
@@ -609,6 +614,7 @@ with right:
     unsafe_allow_html=True
     )
 
+st.write("")
 st.divider()
 
 # =====================================
@@ -663,7 +669,7 @@ unsafe_allow_html=True
 )
 
 st.write("")
-
+st.divider()
 
 
 # =====================================
@@ -678,6 +684,8 @@ st.markdown(
 """,
 unsafe_allow_html=True
 )
+
+st.write("")
 
 col1,col2,col3,col4 = st.columns(4)
 
@@ -709,6 +717,7 @@ with col4:
         "🚀"
     )
 
+st.write("")
 st.divider()
 
 # =====================================

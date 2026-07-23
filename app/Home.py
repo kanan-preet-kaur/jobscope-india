@@ -1,5 +1,12 @@
 import streamlit as st
 
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.warning("Please register/login to access the dashboard.")
+    st.switch_page("pages/00_Authentication.py")
+
 from utils.loader import load_data
 from services.dashboard_metrics import get_dashboard_metrics
 
@@ -11,7 +18,8 @@ from utils.theme import apply_page_config, inject_theme_css
 
 from config import (
     PROJECT_NAME,
-    PROJECT_TAGLINE
+    PROJECT_TAGLINE,
+    LOGO_PATH
 )
 
 
@@ -41,41 +49,59 @@ dashboard_metrics = get_dashboard_metrics(df)
 # =====================================
 
 
-page_header(
-    title=PROJECT_NAME,
-    subtitle=PROJECT_TAGLINE
-)
+# =====================================
+# HERO BRANDING
+# =====================================
 
+logo_col1, logo_col2, logo_col3 = st.columns([1.7, 2, 1])
+
+
+with logo_col2:
+    st.image(
+        LOGO_PATH,
+        width=250
+    )
 
 st.markdown(
-"""
-<div class="hero-container">
+    f"""
+    <div style="text-align:center;">
 
-<div class="hero-badge">
-📊 Data Analytics Dashboard
-</div>
+    <h1 style="
+        margin-top:-1rem;
+        margin-bottom:0.25rem;
+        font-size:3rem;
+        font-weight:800;
+        color:white;
+    ">
+    {PROJECT_NAME}
+    </h1>
 
+    <h3 style="
+        margin-bottom:1rem;
+        color:#A78BFA;
+        font-weight:600;
+    ">
+    India's Job Market Intelligence Platform
+    </h3>
 
-<h3>
-Understanding India's Employment Landscape
-</h3>
+    <p style="
+        max-width:760px;
+        margin:auto;
+        color:#CBD5E1;
+        font-size:1.08rem;
+        line-height:1.8;
+    ">
+    Transforming India's employment data into actionable intelligence
+    through interactive analytics, salary benchmarking,
+    hiring trends, and workforce insights.
+    </p>
 
-
-<p>
-Transforming thousands of job listings into meaningful insights
-about salaries, skills, companies, locations, and hiring trends.
-</p>
-
-
-</div>
-
-""",
-unsafe_allow_html=True
+    </div>
+    """,
+    unsafe_allow_html=True
 )
 
-
-
-st.write("")
+st.divider()
 
 
 
@@ -96,7 +122,7 @@ A quick snapshot of the Indian job market analysed through JobScope India.
 unsafe_allow_html=True
 )
 
-
+st.write("")
 
 col1, col2, col3, col4 = st.columns(
     4,
@@ -145,7 +171,7 @@ with col4:
 
 
 
-
+st.write("")
 st.divider()
 
 
@@ -280,7 +306,7 @@ unsafe_allow_html=True
 )
 
 
-
+st.write("")
 st.divider()
 
 # =====================================
@@ -461,7 +487,7 @@ Key information captured within the dataset.
 unsafe_allow_html=True
 )
 
-
+st.write("")
 
 feature_data = {
 
@@ -512,7 +538,7 @@ dataset_features = st.dataframe(
 )
 
 
-
+st.write("")
 st.divider()
 
 
@@ -539,7 +565,7 @@ First 15 records after data cleaning and preprocessing.
 unsafe_allow_html=True
 )
 
-
+st.write("")
 
 with st.container():
 
@@ -550,6 +576,7 @@ with st.container():
         height=450
     )
 
+st.write("")
 st.divider()
 
 # =====================================
@@ -574,7 +601,7 @@ Discover meaningful patterns and trends hidden within India's employment data.
 unsafe_allow_html=True
 )
 
-
+st.write("")
 
 feature1, feature2, feature3 = st.columns(
     3,
@@ -663,7 +690,7 @@ unsafe_allow_html=True
 )
 
 
-
+st.write("")
 st.divider()
 
 
@@ -690,7 +717,7 @@ Planned enhancements to make JobScope India more powerful.
 unsafe_allow_html=True
 )
 
-
+st.write("")
 
 future1, future2, future3 = st.columns(
     3,
@@ -773,7 +800,7 @@ unsafe_allow_html=True
 
 
 
-
+st.write("")
 st.divider()
 
 
@@ -800,6 +827,7 @@ Technologies used to build the JobScope India analytics platform.
 unsafe_allow_html=True
 )
 
+st.write("")
 
 
 stack = [
@@ -834,19 +862,17 @@ for col, item in zip(cols, stack):
     with col:
 
         st.markdown(
-        f"""
-        <div class="tech-pill">
-
-        {item}
-
-        </div>
-        """,
-        unsafe_allow_html=True
+            f"""
+            <div class="tech-pill">
+                <span style="color:#CBD5E1;">{item}</span>
+            </div>
+            """,
+            unsafe_allow_html=True
         )
 
 
 
-
+st.write("")
 st.divider()
 
 

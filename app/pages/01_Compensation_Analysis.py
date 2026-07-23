@@ -1,4 +1,12 @@
 import streamlit as st
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.warning("Please register/login to access the dashboard.")
+    st.switch_page("pages/00_Authentication.py")
+
 import pandas as pd
 import numpy as np
 
@@ -215,7 +223,7 @@ unsafe_allow_html=True
 
 
 st.write("")
-
+st.divider()
 
 
 # =====================================
@@ -232,7 +240,7 @@ st.markdown(
 unsafe_allow_html=True
 )
 
-
+st.write("")
 
 col1, col2, col3, col4 = st.columns(
     4,
@@ -280,36 +288,9 @@ with col4:
     )
 
 
-
+st.write("")
 st.divider()
 
-
-
-# =====================================
-# ANALYSIS INTRO
-# =====================================
-
-
-st.markdown(
-"""
-<div class="section-banner">
-
-<h3>
-📈 Salary Intelligence
-</h3>
-
-<p>
-
-The following analysis uses cleaned job market
-data to understand salary concentration,
-market variation, and compensation growth.
-
-</p>
-
-</div>
-""",
-unsafe_allow_html=True
-)
 
 # =====================================
 # SALARY EXPLORER

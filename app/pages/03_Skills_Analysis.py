@@ -1,4 +1,12 @@
 import streamlit as st
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.warning("Please register/login to access the dashboard.")
+    st.switch_page("pages/00_Authentication.py")
+
 import pandas as pd
 import numpy as np
 
@@ -185,6 +193,7 @@ unsafe_allow_html=True
 )
 
 st.write("")
+st.divider()
 
 
 # =====================================
@@ -287,34 +296,8 @@ with col4:
     )
 
 st.divider()
+st.write("")
 
-# =====================================
-# ANALYSIS INTRO
-# =====================================
-
-st.markdown(
-"""
-<div class="section-banner">
-
-<h3>
-🚀 Skills Intelligence
-</h3>
-
-<p>
-
-The following analysis highlights employer demand
-for technical skills, premium technologies,
-and relationships between commonly requested
-skills using cleaned job market data.
-
-</p>
-
-</div>
-""",
-unsafe_allow_html=True
-)
-
-st.divider()
 
 # =====================================
 # CHART 8

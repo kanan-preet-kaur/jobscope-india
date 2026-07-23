@@ -1,4 +1,12 @@
 import streamlit as st
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.warning("Please register/login to access the dashboard.")
+    st.switch_page("pages/00_Authentication.py")
+
 import pandas as pd
 import numpy as np
 
@@ -231,6 +239,7 @@ unsafe_allow_html=True
 
 
 st.write("")
+st.divider()
 
 # =====================================
 # JOB MARKET SNAPSHOT
@@ -246,6 +255,7 @@ st.markdown(
 unsafe_allow_html=True
 )
 
+st.write("")
 
 
 col1, col2, col3, col4 = st.columns(
@@ -294,7 +304,7 @@ with col4:
     )
 
 
-
+st.write("")
 st.divider()
 
 
@@ -313,7 +323,7 @@ st.markdown(
 unsafe_allow_html=True
 )
 
-
+st.write("")
 
 filter_col1, filter_col2 = st.columns(
     2,
@@ -381,7 +391,7 @@ if selected_roles:
     ]
 
 
-
+st.write("")
 st.divider()
 
 

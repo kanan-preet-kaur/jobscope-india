@@ -1,7 +1,6 @@
 import streamlit as st
 from config import PROJECT_NAME, PROJECT_TAGLINE, LOGO_PATH
 
-
 def render_sidebar():
 
     with st.sidebar:
@@ -13,7 +12,7 @@ def render_sidebar():
         try:
             st.image(
                 LOGO_PATH,
-                width=90
+                width=220
             )
 
         except:
