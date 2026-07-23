@@ -1,12 +1,5 @@
 import streamlit as st
 
-if "authenticated" not in st.session_state:
-    st.session_state.authenticated = False
-
-if not st.session_state.authenticated:
-    st.warning("Please register/login to access the dashboard.")
-    st.switch_page("pages/00_Authentication.py")
-
 from utils.loader import load_data
 from services.dashboard_metrics import get_dashboard_metrics
 

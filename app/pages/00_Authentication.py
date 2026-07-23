@@ -16,6 +16,12 @@ inject_theme_css()
 
 render_sidebar()
 
+if st.session_state.pop("show_auth_message", False):
+    st.warning("🔒 Welcome to JobScope India! Please log in or register to access the dashboard.")
+
+    if st.button("OK"):
+        st.rerun()
+
 # =====================================
 # SECTION 1: HERO SECTION
 # =====================================

@@ -1,232 +1,233 @@
 .metric-card {
-  background: #1b2234;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  padding: 20px;
-  min-height: 170px;
-  text-align: center;
+    background: #1b2234;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 20px;
+    min-height: 170px;
+    text-align: center;
 
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
 
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .metric-card:hover {
     transform: translateY(-8px);
     border-color: #3B82F6;
-    box-shadow: 0 16px 40px rgba(37,99,235,.25);
+    box-shadow: 0 16px 40px rgba(37, 99, 235, .25);
 }
 
 .metric-icon {
-  font-size: 30px;
-  margin-bottom: 10px;
+    font-size: 30px;
+    margin-bottom: 10px;
 }
 
 .metric-value {
-  font-size: clamp(20px, 2vw, 40px);
-  font-weight: 700;
-  color: white;
+    font-size: clamp(18px, 1.6vw, 34px);
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+    word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 .metric-title {
-  font-size: 16px;
-  color: #94a3b8;
-  margin-top: 8px;
+    font-size: 16px;
+    color: #94a3b8;
+    margin-top: 8px;
 }
 
-.hero{
-    background: linear-gradient(135deg,#182033,#111827);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:20px;
-    padding:30px;
-    margin-bottom:25px;
+.hero {
+    background: linear-gradient(135deg, #182033, #111827);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 25px;
 }
 
-.hero-title{
-    font-size:42px;
-    font-weight:700;
-    color:white;
+.hero-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: white;
 }
 
-.hero-subtitle{
-    margin-top:8px;
-    font-size:20px;
-    color:#CBD5E1;
+.hero-subtitle {
+    margin-top: 8px;
+    font-size: 20px;
+    color: #CBD5E1;
 }
 
-.hero-description{
-    margin-top:18px;
-    font-size:16px;
-    line-height:1.8;
-    color:#94A3B8;
-    max-width:900px;
+.hero-description {
+    margin-top: 18px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #94A3B8;
+    max-width: 900px;
 }
 
 .insight-box {
     background:
-    #111827;
+        #111827;
     border:
-    1px solid rgba(255,255,255,0.08);
+        1px solid rgba(255, 255, 255, 0.08);
     border-radius:
-    14px;
+        14px;
     padding:
-    16px 22px;
+        16px 22px;
     margin-top:
-    18px;
+        18px;
     margin-bottom:
-    35px;
+        35px;
     box-shadow:
-    0 8px 25px rgba(0,0,0,0.20);
+        0 8px 25px rgba(0, 0, 0, 0.20);
 
     animation:
-    fadeSlide 0.5s ease;
+        fadeSlide 0.5s ease;
 
     transition:
-    all 0.25s ease;
+        all 0.25s ease;
 }
 
 
 
 .insight-box:hover {
     border-color:
-    rgba(167,139,250,0.35);
+        rgba(167, 139, 250, 0.35);
 
     transform:
-    translateY(-3px);
+        translateY(-3px);
 }
 
 
 
 .insight-header {
     font-size:
-    17px;
+        17px;
 
     font-weight:
-    600;
+        600;
 
     color:
-    #A78BFA;
+        #A78BFA;
 
     margin-bottom:
-    8px;
+        8px;
 }
 
 
 
 .insight-text {
     color:
-    #CBD5E1;
+        #CBD5E1;
 
     font-size:
-    14px;
+        14px;
 
     line-height:
-    1.7;
+        1.7;
 }
 
 
 
 .highlight {
     color:
-    #E9D5FF;
+        #E9D5FF;
 
     font-weight:
-    600;
+        600;
 }
 
 .stPlotlyChart {
     background:
-    #0F172A;
+        #0F172A;
 
     border:
-    1px solid rgba(255,255,255,0.10);
+        1px solid rgba(255, 255, 255, 0.10);
 
     border-radius:
-    20px;
+        20px;
 
     padding:
-    12px;
+        12px;
 
     box-shadow:
-    0 12px 35px rgba(0,0,0,0.35);
+        0 12px 35px rgba(0, 0, 0, 0.35);
 
     transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 
 
 .stPlotlyChart:hover {
     transform:
-    translateY(-4px);
+        translateY(-4px);
 
     box-shadow:
-    0 20px 45px rgba(0,0,0,0.45);
+        0 20px 45px rgba(0, 0, 0, 0.45);
 }
 
 .stPlotlyChart iframe {
     overflow:
-    hidden !important;
+        hidden !important;
 }
 
 
 .stPlotlyChart {
     overflow:
-    hidden !important;
+        hidden !important;
 }
 
 .summary-grid {
-    display:grid;
+    display: grid;
     grid-template-columns:
-    repeat(3,1fr);
-    gap:20px;
-    margin-top:20px;
+        repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
 }
 
 
 
 .summary-card {
     background:
-    linear-gradient(
-        145deg,
-        #111827,
-        #1E293B
-    );
+        linear-gradient(145deg,
+            #111827,
+            #1E293B);
 
     border:
-    1px solid rgba(255,255,255,0.08);
-    border-radius:18px;
-    padding:25px;
+        1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 25px;
     transition:
-    transform .3s ease,
-    box-shadow .3s ease;
+        transform .3s ease,
+        box-shadow .3s ease;
 }
 
 
 
 .summary-card:hover {
     transform:
-    translateY(-6px);
+        translateY(-6px);
     box-shadow:
-    0 20px 40px rgba(0,0,0,.35);
+        0 20px 40px rgba(0, 0, 0, .35);
 }
 
 
 
 .summary-card h3 {
-    color:white;
-    margin-bottom:12px;
+    color: white;
+    margin-bottom: 12px;
 }
 
 
 
 .summary-card p {
-    color:#CBD5E1;
-    line-height:1.7;
+    color: #CBD5E1;
+    line-height: 1.7;
 }
 
 /* ==========================================
@@ -276,12 +277,12 @@
 
 /* Header button hover */
 [data-testid="stHeader"] button:hover {
-    background-color: rgba(255,255,255,0.1) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* ==========================================
    STREAMLIT IMAGE MARGIN ADJUSTMENTS
-========================================== */   
+========================================== */
 
 /* Remove space below the logo */
 [data-testid="stImage"] {

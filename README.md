@@ -1,18 +1,22 @@
 # 🇮🇳 JobScope India
 
-### Interactive Analytics Dashboard for India's Job Market
+### India's Job Market Intelligence Platform
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge\&logo=pandas)
-![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge\&logo=numpy)
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy)
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge)
 ![Seaborn](https://img.shields.io/badge/Seaborn-5A9BD5?style=for-the-badge)
-![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge\&logo=plotly)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge\&logo=streamlit)
+![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 
-*A modern data analytics project that explores **97,929 real-world Indian job listings** through interactive visualizations and a professional Streamlit dashboard.*
+**Transforming India's employment data into actionable intelligence through interactive analytics, salary benchmarking, hiring trends, and workforce insights.**
+
+🌐 **Live Demo:** *Coming Soon*  
+🔗 **GitHub Repository:** *Add Repository Link Here*
 
 </div>
 
@@ -20,94 +24,166 @@
 
 # 📌 Overview
 
-**JobScope India** is an end-to-end Data Analytics project that transforms raw job market data into actionable insights using **Python, Pandas, Plotly, and Streamlit**.
+**JobScope India** is a full-stack data analytics platform built to help students, recruiters, working professionals, and mentors understand India's rapidly evolving job market through interactive business intelligence.
 
-The project analyzes hiring trends, salary distributions, company activity, in-demand skills, geographic patterns, and experience requirements through an interactive dashboard designed for intuitive data exploration and business intelligence.
+Using **97,929 real-world job listings**, the platform uncovers hiring trends, salary distributions, in-demand skills, company activity, experience requirements, and geographic opportunities through an intuitive and modern dashboard.
 
----
-
-# 🎯 Key Objectives
-
-* Analyze hiring trends across India
-* Explore salary and experience patterns
-* Identify top hiring companies and locations
-* Discover the most in-demand skills
-* Build an interactive analytics dashboard
-* Present insights through compelling visualizations
+Beyond analytics, the project demonstrates the complete lifecycle of building a real-world software product—from data preprocessing and exploratory analysis to authentication, modular architecture, reusable components, and deployment-ready development.
 
 ---
 
-# 📊 Dataset
+# 🚀 Why JobScope India?
 
-| Metric        | Value      |
-| ------------- | ---------- |
-| Records       | **97,929** |
-| Features      | **19**     |
-| Companies     | **18,617** |
-| Locations     | **10,064** |
-| Unique Skills | **59,438** |
+The Indian job market is constantly evolving, yet many students and professionals struggle to answer questions such as:
 
-**Source:** Kaggle – Indian Job Market Dataset 2025
+- Which companies are hiring the most?
+- Which cities offer the best opportunities?
+- Which skills are currently in demand?
+- How do salaries vary across industries and experience levels?
+- What does the overall hiring landscape look like?
+
+JobScope India answers these questions through interactive visualizations and business insights, making employment data easier to understand and enabling better career decisions.
 
 ---
 
 # ✨ Features
 
-* 📊 Interactive Plotly visualizations
-* 🎨 Modern and responsive Streamlit dashboard
-* 📈 KPI metric cards for quick insights
-* 🔍 Dynamic filtering and exploration
-* 💰 Compensation and salary analysis
-* 🛠️ Skills demand analysis
-* 🏢 Company hiring insights
-* 👨‍💼 Experience-level analysis
-* 🌍 Geographic hiring trends
-* 📌 Business insights and key findings
+### 📊 Interactive Analytics
+
+- Comprehensive dashboard with 15+ interactive visualizations
+- KPI cards summarizing key market statistics
+- Interactive charts powered by Plotly
+- Clean, responsive, and modern UI
+
+### 📈 Market Intelligence
+
+- Compensation & Salary Analysis
+- Job Market Analysis
+- Skills Demand Analysis
+- Company Hiring Analysis
+- Experience-Level Analysis
+- Geographic Hiring Trends
+- Business Insights & Key Findings
+
+### 🔐 Authentication
+
+- Secure User Registration
+- User Login System
+- Password Hashing using Passlib & bcrypt
+- SQLite Database Integration
+- Session Management
+- Protected Dashboard Pages
+
+---
+
+# ⭐ What Makes This Project Different?
+
+Unlike a traditional Streamlit dashboard, **JobScope India** was designed as a complete software product.
+
+The project focuses not only on extracting insights from data but also on building an application that is modular, secure, scalable, and easy to maintain.
+
+It demonstrates concepts such as:
+
+- Modular project architecture
+- Separation of concerns
+- Reusable UI components
+- Secure authentication workflow
+- Database integration
+- Session management
+- Custom UI/UX using CSS
+- Deployment-ready application structure
+
+---
+
+# 📊 Dataset
+
+| Metric | Value |
+|---------|------:|
+| Records | **97,929** |
+| Features | **19** |
+| Companies | **18,617** |
+| Locations | **10,064** |
+| Unique Skills | **59,438** |
+
+**Source:** Kaggle – Indian Job Market Dataset (2025–2026)
+
+---
+
+# 🛠 Tech Stack
+
+| Category | Technologies |
+|----------|--------------|
+| **Programming** | Python |
+| **Data Analysis** | Pandas, NumPy |
+| **Visualization** | Plotly, Matplotlib, Seaborn |
+| **Dashboard Development** | Streamlit |
+| **Database** | SQLite |
+| **Authentication** | Passlib, bcrypt |
+| **Development Tools** | Jupyter Notebook, Git, GitHub, VS Code |
 
 ---
 
 # 📂 Project Structure
 
+# 📂 Project Structure
+
 ```text
 jobscope-india/
-├── .venv/
+│
 ├── app/
+│   │
+│   ├── Home.py                          # Landing page & dashboard overview
+│   ├── config.py                        # Project-wide constants & configuration
+│   │
 │   ├── assets/
 │   │   ├── css/
-│   │   │   └── main.css
+│   │   │   └── main.css                 # Global styling
+│   │   │
 │   │   └── icons/
-│   │       └── logo.png
+│   │       └── logo.png                 # Application logo
+│   │
 │   ├── components/
 │   │   ├── __init__.py
-│   │   ├── headers.py
-│   │   ├── metrics.py
-│   │   └── sidebar.py
+│   │   ├── headers.py                   # Page headers
+│   │   ├── metrics.py                   # KPI metric cards
+│   │   └── sidebar.py                   # Navigation sidebar
+│   │
+│   ├── database/
+│   │   ├── auth.py                      # Authentication logic
+│   │   ├── database.py                  # SQLite database connection
+│   │   └── users.py                     # User registration & login operations
+│   │
 │   ├── pages/
-│   │   ├── 01_Compensation_Analysis.py
-│   │   ├── 02_Job_Market_Analysis.py
-│   │   ├── 03_Skills_Analysis.py
-│   │   ├── 04_Company_Analysis.py
-│   │   ├── 05_Experience_Analysis.py
-│   │   ├── 06_Geographic_Analysis.py
-│   │   └── 07_Key_Findings.py
+│   │   ├── 00_Authentication.py         # Login & Registration
+│   │   ├── 01_Compensation_Analysis.py  # Salary & compensation insights
+│   │   ├── 02_Job_Market_Analysis.py    # Hiring trends & market overview
+│   │   ├── 03_Skills_Analysis.py        # Skills demand analysis
+│   │   ├── 04_Company_Analysis.py       # Company hiring analysis
+│   │   ├── 05_Experience_Analysis.py    # Experience-level analysis
+│   │   ├── 06_Geographic_Analysis.py    # Geographic hiring trends
+│   │   └── 07_Key_Findings.py           # Business insights & conclusions
+│   │
 │   ├── services/
 │   │   ├── __init__.py
-│   │   └── dashboard_metrics.py
-│   ├── utils/
-│   │   ├── __init__.py
-│   │   ├── loader.py
-│   │   └── theme.py
-│   ├── config.py
-│   └── Home.py
+│   │   └── dashboard_metrics.py         # Dashboard KPI calculations
+│   │
+│   └── utils/
+│       ├── __init__.py
+│       ├── loader.py                    # Dataset loading utilities
+│       └── theme.py                     # Streamlit theme & page configuration
+│
 ├── data/
-│   ├── processed/
-│   │   └── cleaned_job_market.csv
-│   └── raw/
-│       └── indian-job-market-dataset-2025.xlsx
+│   ├── raw/
+│   │   └── indian-job-market-dataset-2025.xlsx
+│   │
+│   └── processed/
+│       └── cleaned_job_market.csv
+│
 ├── notebooks/
-│   ├── 01_data_understanding.ipynb
-│   ├── 02_data_cleaning.ipynb
-│   └── 03_exploratory_data_analysis.ipynb
+│   ├── 01_data_understanding.ipynb      # Dataset exploration
+│   ├── 02_data_cleaning.ipynb           # Data preprocessing
+│   └── 03_exploratory_data_analysis.ipynb # Exploratory Data Analysis (EDA)
+│
 ├── .gitignore
 ├── README.md
 └── requirements.txt
@@ -115,85 +191,56 @@ jobscope-india/
 
 ---
 
-# 🛠️ Tech Stack
+# 📊 Dashboard Overview
 
-### Programming Language
-
-* Python
-
-### Data Analysis
-
-* Pandas
-* NumPy
-
-### Data Visualization
-
-* Plotly
-* Matplotlib
-* Seaborn
-
-### Dashboard Development
-
-* Streamlit
-
-### Development Tools
-
-* Jupyter Notebook
-* Visual Studio Code
-* Git
-* GitHub
+| Page | Description |
+|------|-------------|
+| 🏠 Home | Platform overview and key market metrics |
+| 🔐 Authentication | User registration and login |
+| 💰 Compensation Analysis | Salary distributions and compensation insights |
+| 📈 Job Market Analysis | Hiring trends and employment landscape |
+| 🛠️ Skills Analysis | Most in-demand skills and technologies |
+| 🏢 Company Analysis | Company hiring activity and recruiter insights |
+| 👨‍💼 Experience Analysis | Experience-wise hiring patterns |
+| 🌍 Geographic Analysis | Regional hiring trends across India |
+| 📌 Key Findings | Summary of business insights and observations |
 
 ---
 
-# 📦 Python Libraries
+# 📈 Home Dashboard Metrics
 
-* pandas
-* numpy
-* matplotlib
-* seaborn
-* plotly
-* streamlit
-* openpyxl
-* pillow
+The landing dashboard provides a quick snapshot of the Indian job market through key indicators including:
 
----
+- 💼 Total Job Postings
+- 🏢 Total Companies
+- 📍 Hiring Locations
+- 🛠️ Unique Skills
 
-# 📊 Dashboard Pages
-
-| Page                      | Description                               |
-| ------------------------- | ----------------------------------------- |
-| 🏠 Home                   | Project overview and key metrics          |
-| 💰 Compensation Analysis  | Salary trends and compensation insights   |
-| 📈 Job Market Analysis    | Hiring trends and job distribution        |
-| 🛠️ Skills Analysis       | In-demand and high-paying skills          |
-| 🏢 Company Analysis       | Company hiring activity and ratings       |
-| 👨‍💼 Experience Analysis | Experience-level hiring patterns          |
-| 🌍 Geographic Analysis    | Regional hiring trends across India       |
-| 📌 Key Findings           | Summary of major insights and conclusions |
+These metrics provide users with an immediate overview before exploring detailed analyses.
 
 ---
 
 # 🚀 Getting Started
 
-## Clone the Repository
+### Clone the Repository
 
 ```bash
-git clone <https://github.com/kanan-preet-kaur/jobscope-india>
+git clone <YOUR_GITHUB_REPOSITORY_LINK>
 ```
 
-## Navigate to the Project Directory
+### Navigate to the Project
 
 ```bash
 cd jobscope-india
 ```
 
-## Install Dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Run the Application
+### Run the Application
 
 ```bash
 streamlit run app/Home.py
@@ -201,45 +248,32 @@ streamlit run app/Home.py
 
 ---
 
-# 💡 Key Insights
+# 💡 Skills Demonstrated
 
-Some key observations from the analysis include:
+This project provided practical experience in both **Data Analytics** and **Software Engineering**, including:
 
-* 📈 Technology roles dominate hiring across the dataset.
-* 💰 Higher experience levels generally correspond to higher salary ranges.
-* 🛠️ Skills such as Python, SQL, Java, and cloud technologies are among the most sought-after.
-* 🏢 A small number of companies account for a significant share of job postings.
-* 🌍 Metropolitan cities remain the primary employment hubs in India.
-
----
-
-# 🎯 Learning Outcomes
-
-Through this project, I gained hands-on experience in:
-
-* Data Cleaning & Preprocessing
-* Feature Engineering
-* Exploratory Data Analysis (EDA)
-* Interactive Data Visualization
-* Dashboard Development with Streamlit
-* Data Storytelling
-* Business Intelligence
-* Git & GitHub Workflow
-* Project Organization and Modular Code Design
+- Data Cleaning & Preprocessing
+- Exploratory Data Analysis (EDA)
+- Interactive Data Visualization
+- Business Intelligence Dashboard Design
+- Authentication & Authorization
+- SQLite Database Integration
+- Password Security
+- Session Management
+- Modular Application Development
+- Reusable Component Design
+- UI/UX Design with Custom CSS
+- Git & GitHub Workflow
+- Deployment-Ready Project Organization
 
 ---
 
-# 🚀 Future Enhancements
+# 🔮 Future Enhancements
 
-Potential improvements for future versions include:
-
-* 🤖 Machine Learning-based Salary Prediction
-* 💼 Job Recommendation System
-* 📝 NLP Analysis of Job Descriptions
-* 📊 Time-Series Hiring Trends
-* 🔍 Advanced Dashboard Filters
-* 🌐 Live Job Market Data Integration
-* 📈 Company Comparison Dashboard
+- 🤖 Machine Learning-Based Salary Prediction
+- 📝 NLP Analysis of Job Descriptions
+- 📊 Advanced Workforce Analytics
+- 🌐 Real-Time Job Market Data Integration
 
 ---
 
@@ -249,24 +283,18 @@ Potential improvements for future versions include:
 
 B.Tech Computer Science & Engineering
 
-Passionate about **Data Analytics**, **Data Visualization**, and **Software Development**.
+Passionate about **Data Analytics**, **Software Engineering**, **Data Visualization**, and building impactful applications.
 
-### Connect with Me
+**GitHub:** *Add GitHub Profile Link*
 
-* 💼 LinkedIn: *[LinkedIn](https://www.linkedin.com/in/kanan-preet-kaur/)* 
-* 💻 GitHub: *[GitHub](https://github.com/kanan-preet-kaur)* 
-* 📧 Email: *kananpreetkaur01@gmail.com*
+**LinkedIn:** *Add LinkedIn Profile Link*
 
 ---
 
-
 <div align="center">
 
-## ⭐ Thank You for Visiting!
+### ⭐ If you found this project useful, consider giving it a star!
 
-### If you like this project, don't forget to leave a ⭐ on the repository.
-
-**Built with ❤️ using Python, NumPy, Pandas, Matplotlib, Seaborn, Plotly & Streamlit**
+**Built with ❤️ using Python, Streamlit, Pandas, NumPy, Plotly, Matplotlib, Seaborn, SQLite, Passlib & bcrypt**
 
 </div>
-
