@@ -58,4 +58,4 @@ COLORS = {
 
 PAGE_LAYOUT = "wide"
 
-PAGE_TITLE = "JobScope India | Analytics Dashboard"
+PAGE_TITLE = "JobScope India"
