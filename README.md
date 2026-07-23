@@ -15,7 +15,7 @@
 
 **Transforming India's employment data into actionable intelligence through interactive analytics, salary benchmarking, hiring trends, and workforce insights.**
 
-🌐 **Live Demo:** *Coming Soon*  
+🌐 **Live Demo:** *https://jobscope-india.streamlit.app/*  
 🔗 **GitHub Repository:** *https://github.com/kanan-preet-kaur/jobscope-india*
 
 </div>
