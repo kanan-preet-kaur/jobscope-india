@@ -16,7 +16,7 @@
 **Transforming India's employment data into actionable intelligence through interactive analytics, salary benchmarking, hiring trends, and workforce insights.**
 
 🌐 **Live Demo:** *Coming Soon*  
-🔗 **GitHub Repository:** *Add Repository Link Here*
+🔗 **GitHub Repository:** *https://github.com/kanan-preet-kaur/jobscope-india*
 
 </div>
 
@@ -225,7 +225,7 @@ These metrics provide users with an immediate overview before exploring detailed
 ### Clone the Repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_LINK>
+git clone https://github.com/kanan-preet-kaur/jobscope-india
 ```
 
 ### Navigate to the Project
@@ -285,9 +285,9 @@ B.Tech Computer Science & Engineering
 
 Passionate about **Data Analytics**, **Software Engineering**, **Data Visualization**, and building impactful applications.
 
-**GitHub:** *Add GitHub Profile Link*
+**GitHub:** *https://github.com/kanan-preet-kaur*
 
-**LinkedIn:** *Add LinkedIn Profile Link*
+**LinkedIn:** *https://www.linkedin.com/in/kanan-preet-kaur/*
 
 ---
 
